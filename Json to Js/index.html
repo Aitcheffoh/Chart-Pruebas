@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+  <p id="hola">Vacio</p>
+
+  <script>
+
+    usuario1 = {"name" : "Fabian", "Edad" : "22", "Pais" : "Colombia"}
+    usuarioJson = JSON.stringify(usuario1);
+    console.log(usuarioJson)
+    document.getElementById("hola").innerHTML = usuarioJson;
+    console.log(JSON.parse(usuarioJson));
+
+  </script>
+</body>
+</html>

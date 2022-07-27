@@ -1,0 +1,11 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.cajaPrincipal{
+    height: 30%;
+    width: 90vw;
+    border: 1px solid black;
+    margin-top: 10%;
+    margin-left: 5%;
+}

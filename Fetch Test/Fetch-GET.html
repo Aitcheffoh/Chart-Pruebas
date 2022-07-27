@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Autores</h1>
+    <ul id="autores"></ul>
+
+    <script>
+        
+    const ul = document.getElementById('autores');
+    const url = 'https://randomuser.me/api/?results=10';
+
+    function createNode (element) {
+        return document.createElement(element);
+    }
+    function append(parent, el){
+        return parent.appendChild(el);
+    }
+
+    fetch(url)
+        .then((resp) => resp.json())
+        .then(function(data) {
+            let autores = data.results;
+            return autores.map(function(autores){
+                let li = createNode("li");
+                let img = createNode("img");
+                let span = createNode("span");
+
+                img.src = autores.picture.medium;
+                span.innerHTML = `${autores.name.first} ${autores.name.last}`;
+
+                append(li, img);
+                append(li, span);
+                append(ul, li );
+            })
+        })
+    .catch(function(error) {
+        console.log(error);
+    });
+    </script>
+</body>
+</html>

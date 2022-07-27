@@ -1,0 +1,39 @@
+{
+  "financialreport": [
+    {
+      "dates": "12/12/2014",
+      "numbers": "5",
+      "volume": "89"
+    },
+    {
+      "dates": "12/12/2014",
+      "numbers": "10",
+      "volume": "74"
+    },
+    {
+      "dates": "12/12/2014",
+      "numbers": "8",
+      "volume": "64"
+    },
+    {
+      "dates": "12/12/2014",
+      "numbers": "7",
+      "volume": "89"
+    },
+    {
+      "dates": "12/12/2014",
+      "numbers": "2",
+      "volume": "97"
+    },
+    {
+      "dates": "12/12/2014",
+      "numbers": "4",
+      "volume": "12"
+    },
+    {
+      "dates": "12/12/2014",
+      "numbers": "4",
+      "volume": "50"
+    }
+  ]
+}

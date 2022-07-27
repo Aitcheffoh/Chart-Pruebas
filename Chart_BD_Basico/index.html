@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        body {
+            background-color: #24292e;
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="myChart" style="position: relative; height: 40vh; width: 70vw"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    var ctx = document.getElementById("myChart");
+    var myChart = new Chart(ctx, {
+        type: "bar",
+        data{
+            datasets: [{
+                label: "Stock de Productos",
+                backgroundColor:['#6bf1ab','#63d69f', '#438c6c', '#509c7f', '#1f794e', '#34444c', '#90CAF9', '#64B5F6', '#42A5F5', '#2196F3', '#0D47A1'],
+                bordercolor: [black],
+                borderWidth: 1,
+            }]
+        },
+        options: {
+            scales:{
+                y:{
+                    beginAtZero: true
+                }
+            }
+        }
+    })
+
+    let url = 'http://localhost/apirest/articulos.php'
+
+</script>
+
+</body>
+</html>

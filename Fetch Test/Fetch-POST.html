@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const update = {
+            title: 'A blog post by Kingsley',
+            body: 'Brilliant post on fetch API',
+            userId: 1,
+        };
+
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(update),
+        };
+
+        fetch('https://jsonplaceholder.typicode.com/posts', options)
+            .then(data => {
+                if (!data.ok) {
+                    throw Error(data.status);
+                }
+                return data.json();
+            }).then(update => {
+            console.log(update);
+            // {
+            //
+            'A blog post by Kingsley'
+                //
+            'Brilliant post on fetch API'
+                //
+            1
+                //
+            101
+            // };
+        }).catch(e => {
+            console.log(e);
+        });
+    </script>
+
+</body>
+</html>
+
+
+
+

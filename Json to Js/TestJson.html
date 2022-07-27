@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+
+
+    const requestURL = 'https://github.com/Aitcheffoh/Prueba-Chart/blob/3f50193fd35f27381b38b26fe991db03d678cde1/GraficaMonedaUSDCOP_SPT_RT.json';
+    const request = new XMLHttpRequest();
+    request.open('GET', requestURL);
+    request.responseType = 'json';
+    request.send();
+    request.onload = function() {
+        const datosTablaText = request.response;
+        const datosTabla = JSON.parse(datosTablaText);
+        console.log(datosTabla)
+    }
+
+
+</script>
+</body>
+</html>
