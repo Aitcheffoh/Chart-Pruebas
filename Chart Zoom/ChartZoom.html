@@ -18,7 +18,7 @@
             justify-content: center;
         }
         .chartBox {
-            width: 90vw;
+            width: 60vw;
             padding: 20px;
             border-radius: 5px;
             border: solid 1px Black;
@@ -105,7 +105,8 @@
             label: 'Stock Value',
             type: 'bar',
             data: volume,
-            pointHitRadius: 0,
+            pointRadius: 0,
+            pointHitRadius:0,
             pointHoverRadius: 0,
             yAxisID: 'volume'
         }]
@@ -202,7 +203,7 @@
                     const dateIndex = dates.indexOf(dateCursor.setHours(0, 0, 0, 0))
 
                     //text date
-                    /*ctx.textAlign = 'left';
+                    ctx.textAlign = 'left';
                     ctx.textBaseline = 'middle';
                     ctx.fillStyle = 'white';
                     ctx.font = 'bolder 12px sans-serif';
@@ -280,7 +281,6 @@
                     ctx.fillText(volume[dateIndex].toFixed(0), xTooltip + 5 + iconSpace + valueTextWidth,
                         yTooltip + 50);
                     ctx.restore();
-*/
                 }
             }
         }
@@ -310,10 +310,10 @@
                         drawTicks : true,
                         drawBorder : false,
                         offset: false,
-
                     },
                     ticks: {
                         callback: ((value, index, values) => {
+                            console.log(index,value)
                             const totalTicks = values.length - 2;
                             const monthArray = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct'
                                 ,'Nov','Dec']
@@ -346,7 +346,7 @@
                     min : 0,
                     max : 1000,
                     grid: {
-                        display: false
+                        display: false,
                     },
                     ticks: {
                         display: false
