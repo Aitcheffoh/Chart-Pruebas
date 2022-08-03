@@ -1,7 +1,7 @@
-*{
+* {
     margin: 0;
     padding: 0;
-    font-family: Fontawesome, sans-serif ;
+    font-family: sans-serif, Fontawesome;
 }
 body {
     background: rgba(37,71,106,255);
@@ -78,7 +78,7 @@ body {
     margin-bottom: -15px;
 }
 .precios{
-    width: 15%;
+    width: 20%;
     height: calc(90% - 1px);
     border: 1px solid black;
     float: left;
@@ -86,38 +86,26 @@ body {
     margin-right: 1%;
 }
 .media{
-    width: 15%;
+    width: 20%;
     height: calc(90% - 1px);
     border: 1px solid black;
     float: left;
 }
 .retraso{
-    width: 40%;
+    width: 50%;
     height: calc(90% - 1px);
     border: 1px solid black;
-    float: left;
-    margin-left: 8%;
+    float: right;
+    margin-right: 1%;
     background: white;
-}
-.estadisticas{
-    width: 15%;
-    height: calc(90% - 1px);
-    border: 1px solid black;
-    float: left;
-    margin-left: 3%;
-}
-.estadisticas h1{
-    text-align: center;
-    padding-top: 5%;
 }
 .chartCard {
-    width: 99vw ;
-    height: 44vh;
-    margin-left: 1vh;
-    margin-top: 1vh;
+    width: 98vw ;
+    height: 54vh;
+    margin-left: 2vh;
+    margin-top: 2vh;
     border: 1px solid #24292e;
     background: white;
-    float: left;
 }
 .chartBox {
     width: 100%;
@@ -129,20 +117,15 @@ body {
     height: 15%;
     border-radius: 5px;
 }
-.mercado .title {
-    width: 100%;
-    height: 13%;
-}
 .barraStock{
     width: 100%;
     height: 4vh;
     background: rgba(0,120,172,255);
     margin-top: 10px;
-    float: left;
 }
 .final{
     width: 100%;
-    height: 28.5vh;
+    height: 17.3vh;
 }
 .title{
     width: 100%;
@@ -152,7 +135,7 @@ body {
     text-align: center;
 }
 .tabla1{
-    width: 25%;
+    width: 45%;
     height: 95%;
     background: white;
     float: left;
@@ -171,7 +154,7 @@ body {
     text-align: center;
 }
 .tabla2{
-    width: 25%;
+    width: 50%;
     height: 95%;
     background: white;
     float: left;
@@ -185,20 +168,6 @@ body {
     border-bottom: 1px solid black;
     border-left: 1px solid black;
     text-align: center;
-}
-.tabla3{
-    width: 40%;
-    height: 95%;
-    background: white;
-    float: right;
-    margin-right: 1%;
-    margin-top: 7px;
-}
-
-.contenido3{
-    width: 33.2%;
-    height: 80%;
-    float: right;
 }
 .cont{
     width:100%;

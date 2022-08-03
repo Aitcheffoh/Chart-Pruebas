@@ -1,10 +1,10 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <title>index3</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href=estilos3.css type="text/css">
-    <title>Index3</title>
 </head>
 <body>
 <div class="navbar">
@@ -48,6 +48,9 @@
         <div class="titulo">
             <h2>Información del dólar con 15 minutos de retraso.</h2>
         </div>
+    </div>
+    <div class="estadisticas">
+        <h1> Estadisticas</h1>
     </div>
 </div>
 <div class="chartCard">
@@ -280,103 +283,103 @@
                 }*/
 
                 function datesBox(mousemove) {
-                        ctx.beginPath();
-                        ctx.fillStyle = 'rgba(102, 102, 102, 0.2)';
-                        ctx.strokeStyle = 'rgba(102, 102, 102, 0.2)';
-                        ctx.lineJoin ='round';
-                        ctx.lineWidth = 5;
-                        ctx.fillRect(xTooltip, yTooltip, 150, 60);
-                        ctx.strokeRect(xTooltip, yTooltip, 150, 60);
-                        ctx.closePath();
-                        ctx.restore();
+                    ctx.beginPath();
+                    ctx.fillStyle = 'rgba(102, 102, 102, 0.2)';
+                    ctx.strokeStyle = 'rgba(102, 102, 102, 0.2)';
+                    ctx.lineJoin ='round';
+                    ctx.lineWidth = 5;
+                    ctx.fillRect(xTooltip, yTooltip, 150, 60);
+                    ctx.strokeRect(xTooltip, yTooltip, 150, 60);
+                    ctx.closePath();
+                    ctx.restore();
 
-                        const dateCursor = new Date(x.getValueForPixel(mousemove.offsetX));
-                        const dateIndex = dates.indexOf(dateCursor.setHours(0, 0, 0, 0))
+                    const dateCursor = new Date(x.getValueForPixel(mousemove.offsetX));
+                    const dateIndex = dates.indexOf(dateCursor.setHours(0, 0, 0, 0))
 
-                        //text date
-                        ctx.textAlign = 'left';
-                        ctx.textBaseline = 'middle';
-                        ctx.fillStyle = 'white';
-                        ctx.font = 'bolder 12px sans-serif';
-                        ctx.fillText(dateCursor.toLocaleDateString(), xTooltip + 5, yTooltip + 10);
-                        ctx.restore();
+                    //text date
+                    ctx.textAlign = 'left';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillStyle = 'white';
+                    ctx.font = 'bolder 12px sans-serif';
+                    ctx.fillText(dateCursor.toLocaleDateString(), xTooltip + 5, yTooltip + 10);
+                    ctx.restore();
 
-                        //text time
-                        ctx.textAlign = 'right';
-                        ctx.textBaseline = 'middle';
-                        ctx.fillStyle = 'lightgrey';
-                        ctx.font = 'bolder 10px sans-serif';
-                        ctx.fillText(new Date(x.getValueForPixel(mousemove.offsetX)).toLocaleTimeString(),
-                            xTooltip + 150 - 5, yTooltip + 10)
-                        ctx.restore();
+                    //text time
+                    ctx.textAlign = 'right';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillStyle = 'lightgrey';
+                    ctx.font = 'bolder 10px sans-serif';
+                    ctx.fillText(new Date(x.getValueForPixel(mousemove.offsetX)).toLocaleTimeString(),
+                        xTooltip + 150 - 5, yTooltip + 10)
+                    ctx.restore();
 
-                        //line 2 color DOT
-                        let dotColor;
-                        if (numbers[dateIndex] >= numbers[0]){
-                            dotColor = 'rgba(75, 192, 192, 1)';
-                        } else {
-                            dotColor = 'rgba(255, 26, 104, 1)';
-                        }
-
-                        const dotSpace = 15;
-                        ctx.textAlign = 'left';
-                        ctx.textBaseline = 'middle';
-                        ctx.fillStyle = dotColor;
-                        ctx.font = 'bolder 12px FontAwesome';
-                        ctx.fillText('\uf111', xTooltip + 5, yTooltip + 30);
-                        ctx.restore();
-
-                        //line 2 text price
-                        const priceText = 'Price: ';
-                        const priceTextWidth = ctx.measureText(priceText).width;
-                        ctx.textAlign = 'left';
-                        ctx.textBaseline = 'middle';
-                        ctx.fillStyle = 'lightgrey';
-                        ctx.font = '12px sans-serif';
-                        ctx.fillText(priceText, xTooltip + 5 + dotSpace, yTooltip + 30);
-                        ctx.restore();
-
-                        //line 2 price value
-                        ctx.textAlign = 'left';
-                        ctx.textBaseline = 'middle';
-                        ctx.fillStyle = 'white';
-                        ctx.font = 'bolder 12px sans-serif';
-                        ctx.fillText('$ ' + numbers[dateIndex].toFixed(2), xTooltip + 5 + dotSpace + priceTextWidth,
-                            yTooltip + 30);
-                        ctx.restore();
-
-                        //line 3 icon
-                        const iconSpace = 15;
-                        ctx.textAlign = 'left';
-                        ctx.textBaseline = 'middle';
-                        ctx.fillStyle = 'white';
-                        ctx.font = 'bolder 12px Fontawesome';
-                        ctx.fillText('\uf080', xTooltip + 5, yTooltip + 50);
-                        ctx.restore();
-
-                        //line 3 text price
-                        const valueText = 'Value: ';
-                        const valueTextWidth = ctx.measureText(valueText).width;
-                        ctx.textAlign = 'left';
-                        ctx.textBaseline = 'middle';
-                        ctx.fillStyle = 'lightgrey';
-                        ctx.font = '12px sans-serif';
-                        ctx.fillText(valueText, xTooltip + 5 + iconSpace, yTooltip + 50);
-                        ctx.restore();
-
-                        //line 3 price value
-                        ctx.textAlign = 'left';
-                        ctx.textBaseline = 'middle';
-                        ctx.fillStyle = 'white';
-                        ctx.font = 'bolder 12px sans-serif';
-                        ctx.fillText(volume[dateIndex].toFixed(0), xTooltip + 5 + iconSpace + valueTextWidth,
-                            yTooltip + 50);
-                        ctx.restore();
-
+                    //line 2 color DOT
+                    let dotColor;
+                    if (numbers[dateIndex] >= numbers[0]){
+                        dotColor = 'rgba(75, 192, 192, 1)';
+                    } else {
+                        dotColor = 'rgba(255, 26, 104, 1)';
                     }
+
+                    const dotSpace = 15;
+                    ctx.textAlign = 'left';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillStyle = dotColor;
+                    ctx.font = 'bolder 12px FontAwesome';
+                    ctx.fillText('\uf111', xTooltip + 5, yTooltip + 30);
+                    ctx.restore();
+
+                    //line 2 text price
+                    const priceText = 'Price: ';
+                    const priceTextWidth = ctx.measureText(priceText).width;
+                    ctx.textAlign = 'left';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillStyle = 'lightgrey';
+                    ctx.font = '12px sans-serif';
+                    ctx.fillText(priceText, xTooltip + 5 + dotSpace, yTooltip + 30);
+                    ctx.restore();
+
+                    //line 2 price value
+                    ctx.textAlign = 'left';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillStyle = 'white';
+                    ctx.font = 'bolder 12px sans-serif';
+                    ctx.fillText('$ ' + numbers[dateIndex].toFixed(2), xTooltip + 5 + dotSpace + priceTextWidth,
+                        yTooltip + 30);
+                    ctx.restore();
+
+                    //line 3 icon
+                    const iconSpace = 15;
+                    ctx.textAlign = 'left';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillStyle = 'white';
+                    ctx.font = 'bolder 12px Fontawesome';
+                    ctx.fillText('\uf080', xTooltip + 5, yTooltip + 50);
+                    ctx.restore();
+
+                    //line 3 text price
+                    const valueText = 'Value: ';
+                    const valueTextWidth = ctx.measureText(valueText).width;
+                    ctx.textAlign = 'left';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillStyle = 'lightgrey';
+                    ctx.font = '12px sans-serif';
+                    ctx.fillText(valueText, xTooltip + 5 + iconSpace, yTooltip + 50);
+                    ctx.restore();
+
+                    //line 3 price value
+                    ctx.textAlign = 'left';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillStyle = 'white';
+                    ctx.font = 'bolder 12px sans-serif';
+                    ctx.fillText(volume[dateIndex].toFixed(0), xTooltip + 5 + iconSpace + valueTextWidth,
+                        yTooltip + 50);
+                    ctx.restore();
+
                 }
             }
         }
+    }
 
     //customTickMarks plugin block
     /*const customTickMarks = {

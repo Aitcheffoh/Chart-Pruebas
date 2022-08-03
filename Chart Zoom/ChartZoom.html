@@ -313,7 +313,6 @@
                     },
                     ticks: {
                         callback: ((value, index, values) => {
-                            console.log(index,value)
                             const totalTicks = values.length - 2;
                             const monthArray = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct'
                                 ,'Nov','Dec']
@@ -549,11 +548,18 @@
         const timestamp = chart.scales.x.getValueForPixel(mousewheel.offsetX);
         const dayTimestamp = new Date(timestamp).setHours(0, 0, 0, 0);
         const scrollPoint = dates.indexOf(dayTimestamp);
-
-
+console.log(dates.length)
         if(wheelVelocity >= 0){
-            chart.config.options.scales.x.min = dates[dates.indexOf(min) + 1];
-            chart.config.options.scales.x.max = dates[dates.indexOf(max) - 1];
+            chart.config.options.scales.x.min = dates[dates.indexOf(min) + 3];
+            chart.config.options.scales.x.max = dates[dates.indexOf(max) - 3];
+
+            if(dates.length > 500 && wheelVelocity >= 0){
+                    chart.config.options.scales.x.min = dates[dates.indexOf(min) + 15];
+                    chart.config.options.scales.x.max = dates[dates.indexOf(max) - 15];
+            } else if(min > max + (-8068800000) && wheelVelocity >= 0){
+                    chart.config.options.scales.x.min = dates[dates.indexOf(min) + 1];
+                    chart.config.options.scales.x.max = dates[dates.indexOf(max) - 1];
+                }
 
             if(dates[dates.indexOf(min)] <= 0) {
                 chart.config.options.scales.x.min = dates[0];
@@ -568,13 +574,21 @@
             }
         }
 
-        if (min > max + (-1468800000)){
+        if (min > max + (-1668800000)){
             wheelVelocity = -0.1;
         }
 
         if(wheelVelocity < 0){
-            chart.config.options.scales.x.min = dates[dates.indexOf(min) - 1];
-            chart.config.options.scales.x.max = dates[dates.indexOf(max) + 1];
+            chart.config.options.scales.x.min = dates[dates.indexOf(min) - 3];
+            chart.config.options.scales.x.max = dates[dates.indexOf(max) + 3];
+
+            if(dates.length > 500 && wheelVelocity < 0){
+                    chart.config.options.scales.x.min = dates[dates.indexOf(min) - 15];
+                    chart.config.options.scales.x.max = dates[dates.indexOf(max) + 15];
+                } else if(min < max + (-8068800000) && wheelVelocity < 0){
+                    chart.config.options.scales.x.min = dates[dates.indexOf(min) - 1];
+                    chart.config.options.scales.x.max = dates[dates.indexOf(max) + 1];
+                }
 
             if(dates[dates.indexOf(max)] >= dates[dates.length - 1]) {
                 chart.config.options.scales.x.max = dates[dates.length - 1];

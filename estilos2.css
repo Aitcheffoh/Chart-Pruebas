@@ -129,6 +129,16 @@ body {
 .mercado .title {
     width: 100%;
     height: 13%;
+    text-align: center;
+    font-size: 1.5em;
+    padding-top: 1%;
+}
+.mercado .cajasMer {
+    width: 100%;
+    height: 20%;
+    border-top: 1px solid black;
+    text-align: center;
+    font-size: 1.5em;
 }
 .barraStock{
     width: 100%;
