@@ -29,8 +29,8 @@
 <body>
 <div class="chartCard">
     <div class="chartBox">
-        <canvas id="myChart"></canvas>
-        <canvas id="myChart2"></canvas>
+        <canvas id="DolarSpotChart"></canvas>
+        <canvas id="DolarSpotChart2"></canvas>
     </div>
 </div>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -291,6 +291,7 @@
         type: 'line',
         data,
         options: {
+            events: ['mouseout', 'click', 'touchstart'],
             layout:{
                 padding:{
                     left:10,
@@ -365,8 +366,8 @@
     }
 
     // render init block
-    const myChart = new Chart(
-        document.getElementById('myChart'),
+    const DolarSpotChart = new Chart(
+        document.getElementById('DolarSpotChart'),
         config
     );
 
@@ -411,8 +412,8 @@
         return gradientBackground;
     }
 
-    myChart.canvas.addEventListener('mousemove', (e) => {
-        crosshairLine(myChart, e)
+    DolarSpotChart.canvas.addEventListener('mousemove', (e) => {
+        crosshairLine(DolarSpotChart, e)
     })
 
     function crosshairLine( chart, mousemove){
@@ -544,11 +545,12 @@
         let wheelVelocity = mousewheel.wheelDeltaY;
         const min = chart.config.options.scales.x.min;
         const max = chart.config.options.scales.x.max;
+        console.log(chart.config.options.scales.x.ticks)
 
         const timestamp = chart.scales.x.getValueForPixel(mousewheel.offsetX);
         const dayTimestamp = new Date(timestamp).setHours(0, 0, 0, 0);
         const scrollPoint = dates.indexOf(dayTimestamp);
-console.log(dates.length)
+
         if(wheelVelocity >= 0){
             chart.config.options.scales.x.min = dates[dates.indexOf(min) + 3];
             chart.config.options.scales.x.max = dates[dates.indexOf(max) - 3];
@@ -612,8 +614,8 @@ console.log(dates.length)
         chart.update('none');
     }
 
-    myChart.canvas.addEventListener('wheel', (e) => {
-        zoom(myChart, e)
+    DolarSpotChart.canvas.addEventListener('wheel', (e) => {
+        zoom(DolarSpotChart, e)
     })
 
     // setup
@@ -640,8 +642,8 @@ console.log(dates.length)
             animation: false,
             layout: {
                 padding: {
-                    left:myChart.chartArea.left - myChart.config.options.layout.padding.left,
-                    right: myChart.width - myChart.chartArea.right,
+                    left:DolarSpotChart.chartArea.left - DolarSpotChart.config.options.layout.padding.left,
+                    right: DolarSpotChart.width - DolarSpotChart.chartArea.right,
                 }
             },
             aspectRatio: 10,
@@ -707,8 +709,8 @@ console.log(dates.length)
     };
 
     // render init block
-    const myChart2 = new Chart(
-        document.getElementById('myChart2'),
+    const DolarSpotChart2 = new Chart(
+        document.getElementById('DolarSpotChart2'),
         config2
     );
 
@@ -718,8 +720,8 @@ console.log(dates.length)
 
     function zoomBox (min, max){
 
-        myChart2.update ('none');
-        const {ctx, canvas, chartArea: {top, bottom, left, right, width, height}, scales: {x, y}} = myChart2;
+        DolarSpotChart2.update ('none');
+        const {ctx, canvas, chartArea: {top, bottom, left, right, width, height}, scales: {x, y}} = DolarSpotChart2;
 
         if(min === undefined){
             min = dates[0];
@@ -775,7 +777,7 @@ console.log(dates.length)
 
         function mouseCursor(mousemove){
 
-            let minChart1 = myChart.config.options.scales.x.min;
+            let minChart1 = DolarSpotChart.config.options.scales.x.min;
 
             if (minChart1 === undefined || minChart1 === - 1){
                 minChart1 = dates[0];
@@ -783,12 +785,12 @@ console.log(dates.length)
 
             if(mousemove.offsetX >= x.getPixelForValue(minChart1)- 10 && mousemove.offsetX
                 <= x.getPixelForValue(minChart1)+ 10
-                || mousemove.offsetX >= x.getPixelForValue(myChart.config.options.scales.x.max)- 10 && mousemove.offsetX
-                <= x.getPixelForValue(myChart.config.options.scales.x.max)+ 10
+                || mousemove.offsetX >= x.getPixelForValue(DolarSpotChart.config.options.scales.x.max)- 10 && mousemove.offsetX
+                <= x.getPixelForValue(DolarSpotChart.config.options.scales.x.max)+ 10
             ){
                 canvas.style.cursor = 'ew-resize';
             }else if( mousemove.offsetX > x.getPixelForValue(minChart1 ) + 10 && mousemove.offsetX
-                < x.getPixelForValue(myChart.config.options.scales.x.max)
+                < x.getPixelForValue(DolarSpotChart.config.options.scales.x.max)
                 + 10){
                 canvas.style.cursor = 'move';
             } else{
@@ -806,8 +808,8 @@ console.log(dates.length)
 
         function dragStart(drag){
 
-            let minChart1 = myChart.config.options.scales.x.min;
-            let maxChart1 = myChart.config.options.scales.x.max;
+            let minChart1 = DolarSpotChart.config.options.scales.x.min;
+            let maxChart1 = DolarSpotChart.config.options.scales.x.max;
 
             if (minChart1 === undefined || minChart1 === - 1){
                 minChart1 = dates[0];
@@ -816,9 +818,9 @@ console.log(dates.length)
             if(drag.offsetX >= x.getPixelForValue(minChart1)- 10 && drag.offsetX
                 <= x.getPixelForValue(minChart1)+ 10){
                 canvas.onmousemove = (e) => {
-                    dragMove(myChart, e);
+                    dragMove(DolarSpotChart, e);
                 }
-                function dragMove(myChart, dragDelta){
+                function dragMove(DolarSpotChart, dragDelta){
                     const timestamp = x.getValueForPixel(dragDelta.offsetX);
                     const dayTimestamp = new Date(timestamp).setHours(0, 0, 0, 0);
                     let scrollPoint = dates.indexOf(dayTimestamp);
@@ -827,25 +829,25 @@ console.log(dates.length)
                         scrollPoint = 0;
                     }
                     if (dragDelta.offsetX > right && scrollPoint === -1){
-                        scrollPoint = dates.indexOf(myChart.config.options.scales.x.max)- 4;
+                        scrollPoint = dates.indexOf(DolarSpotChart.config.options.scales.x.max)- 4;
                     }
-                    if (scrollPoint > dates.indexOf(myChart.config.options.scales.x.max)- 4){
-                        scrollPoint = dates.indexOf(myChart.config.options.scales.x.max)- 4;
+                    if (scrollPoint > dates.indexOf(DolarSpotChart.config.options.scales.x.max)- 4){
+                        scrollPoint = dates.indexOf(DolarSpotChart.config.options.scales.x.max)- 4;
                     }
 
-                    myChart.config.options.scales.x.min = dates[scrollPoint];
-                    myChart.update('none');
-                    myChart2.update('none');
-                    zoomBoxItem(dates[scrollPoint], myChart.config.options.scales.x.max);
+                    DolarSpotChart.config.options.scales.x.min = dates[scrollPoint];
+                    DolarSpotChart.update('none');
+                    DolarSpotChart2.update('none');
+                    zoomBoxItem(dates[scrollPoint], DolarSpotChart.config.options.scales.x.max);
                 }
             }
 
-            if(drag.offsetX >= x.getPixelForValue(myChart.config.options.scales.x.max)- 10 && drag.offsetX
-                <= x.getPixelForValue(myChart.config.options.scales.x.max)+ 10){
+            if(drag.offsetX >= x.getPixelForValue(DolarSpotChart.config.options.scales.x.max)- 10 && drag.offsetX
+                <= x.getPixelForValue(DolarSpotChart.config.options.scales.x.max)+ 10){
                 canvas.onmousemove = (e) => {
-                    dragMove(myChart, e);
+                    dragMove(DolarSpotChart, e);
                 }
-                function dragMove(myChart, dragDelta){
+                function dragMove(DolarSpotChart, dragDelta){
                     const timestamp = x.getValueForPixel(dragDelta.offsetX);
                     const dayTimestamp = new Date(timestamp).setHours(0, 0, 0, 0);
                     let scrollPoint = dates.indexOf(dayTimestamp);
@@ -854,26 +856,26 @@ console.log(dates.length)
                         scrollPoint = dates.length - 1;
                     }
                     if (dragDelta.offsetX < right && scrollPoint === -1 ){
-                        scrollPoint = dates.dates.indexOf(myChart.config.options.scales.x.min) + 4;
+                        scrollPoint = dates.dates.indexOf(DolarSpotChart.config.options.scales.x.min) + 4;
                     }
-                    if (scrollPoint < dates.indexOf(myChart.config.options.scales.x.min) + 4) {
-                        scrollPoint = dates.indexOf(myChart.config.options.scales.x.min) + 4;
+                    if (scrollPoint < dates.indexOf(DolarSpotChart.config.options.scales.x.min) + 4) {
+                        scrollPoint = dates.indexOf(DolarSpotChart.config.options.scales.x.min) + 4;
                     }
 
-                    myChart.config.options.scales.x.max = dates[scrollPoint];
-                    myChart.update('none');
-                    myChart2.update('none');
-                    zoomBoxItem(myChart.config.options.scales.x.min, dates[scrollPoint]);
+                    DolarSpotChart.config.options.scales.x.max = dates[scrollPoint];
+                    DolarSpotChart.update('none');
+                    DolarSpotChart2.update('none');
+                    zoomBoxItem(DolarSpotChart.config.options.scales.x.min, dates[scrollPoint]);
                 }
             }
 
-            if(drag.offsetX > x.getPixelForValue(myChart.config.options.scales.x.min) + 11 && drag.offsetX
-                < x.getPixelForValue(myChart.config.options.scales.x.max) - 11) {
+            if(drag.offsetX > x.getPixelForValue(DolarSpotChart.config.options.scales.x.min) + 11 && drag.offsetX
+                < x.getPixelForValue(DolarSpotChart.config.options.scales.x.max) - 11) {
                 canvas.onmousemove = (e) => {
-                    dragMoveCenter(myChart, e, minChart1, maxChart1);
+                    dragMoveCenter(DolarSpotChart, e, minChart1, maxChart1);
                 }
 
-                function dragMoveCenter(myChart, dragDelta, staticScaleMin, staticScaleMax){
+                function dragMoveCenter(DolarSpotChart, dragDelta, staticScaleMin, staticScaleMax){
                     //Starting Point
                     const dragStartingPoint = x.getValueForPixel(drag.offsetX);
                     const dayDragStartingPoint = new Date(dragStartingPoint).setHours(0, 0, 0, 0);
@@ -917,19 +919,19 @@ console.log(dates.length)
                     }
 
                     if (minChart1 === dates[0]){
-                        myChart.config.options.scales.x.min = dates[0];
-                        myChart.config.options.scales.x.max = myChart.config.options.scales.x.max;
+                        DolarSpotChart.config.options.scales.x.min = dates[0];
+                        DolarSpotChart.config.options.scales.x.max = DolarSpotChart.config.options.scales.x.max;
                     } else if (maxChart1 === dates[dates.length - 1]){
-                        myChart.config.options.scales.x.min = myChart.config.options.scales.x.min;
-                        myChart.config.options.scales.x.max = dates[dates.length - 1];
-                    } else if (myChart.config.options.scales.x.min >= dates[0] && myChart.config.options.scales.x.max
+                        DolarSpotChart.config.options.scales.x.min = DolarSpotChart.config.options.scales.x.min;
+                        DolarSpotChart.config.options.scales.x.max = dates[dates.length - 1];
+                    } else if (DolarSpotChart.config.options.scales.x.min >= dates[0] && DolarSpotChart.config.options.scales.x.max
                         <= dates[dates.length - 1]){
-                        myChart.config.options.scales.x.min = minChart1;
-                        myChart.config.options.scales.x.max = maxChart1;
+                        DolarSpotChart.config.options.scales.x.min = minChart1;
+                        DolarSpotChart.config.options.scales.x.max = maxChart1;
                     }
 
-                    myChart.update('none');
-                    myChart2.update('none');
+                    DolarSpotChart.update('none');
+                    DolarSpotChart2.update('none');
                     zoomBoxItem(minChart1, maxChart1);
                 }
 
@@ -938,8 +940,8 @@ console.log(dates.length)
 
     }
     window.addEventListener('resize', (e) => {
-        myChart2.resize();
-        zoomBox(myChart.config.options.scales.x.min, myChart.config.options.scales.x.max);
+        DolarSpotChart2.resize();
+        zoomBox(DolarSpotChart.config.options.scales.x.min, DolarSpotChart.config.options.scales.x.max);
     })
 
 </script>
