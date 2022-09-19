@@ -104,7 +104,6 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-
 50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 <script>
-
     Chart.defaults.font.family = "'FontAwesome', 'Helvetica', 'Helvetica Neue', 'Arial', sans-serif";
 
     const dates = [];
@@ -395,6 +394,8 @@
         type: 'line',
         data,
         options: {
+            onclick: click = false,
+            events: ['mouseout','click','touchstart'],
             layout:{
                 padding:{
                     left:10,
@@ -659,8 +660,16 @@
 
 
         if(wheelVelocity >= 0){
-            chart.config.options.scales.x.min = dates[dates.indexOf(min) + 1];
-            chart.config.options.scales.x.max = dates[dates.indexOf(max) - 1];
+            chart.config.options.scales.x.min = dates[dates.indexOf(min) + 3];
+            chart.config.options.scales.x.max = dates[dates.indexOf(max) - 3];
+
+            if(dates.length > 500 && wheelVelocity >= 0){
+                chart.config.options.scales.x.min = dates[dates.indexOf(min) + 15];
+                chart.config.options.scales.x.max = dates[dates.indexOf(max) - 15];
+            }else if(min > max + (-8068800000) && wheelVelocity >= 0){
+                chart.config.options.scales.x.min = dates[dates.indexOf(min) + 1];
+                chart.config.options.scales.x.max = dates[dates.indexOf(max) - 1];
+            }
 
             if(dates[dates.indexOf(min)] <= 0) {
                 chart.config.options.scales.x.min = dates[0];
